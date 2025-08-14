@@ -10,7 +10,7 @@ const NavBar = () => {
       const dispatch = useDispatch();  
     const handleLogout =async() =>{
           try{
-          const req = await axios.post("http://localhost:7777/logout");
+          const req = await axios.post("http://localhost:7777/logout" ,{}, {withCredentials:true});
            toast.success(req.message);
             dispatch(removeUser())
            navigate("/home")
