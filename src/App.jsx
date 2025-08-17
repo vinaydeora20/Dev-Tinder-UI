@@ -1,33 +1,35 @@
-import React from 'react'
-import {BrowserRouter as Router , Routes , Route} from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Body from './components/Body'
 import Login from './components/Login'
-import { Provider } from 'react-redux'
-import appStore from './utils/store/appStore'
+import { useDispatch, useSelector } from 'react-redux'
 import Profile from './components/profile'
 import Splash from './components/Splash.jsx';
-  import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import Home from './components/Home.jsx'
 import Feed from './components/Feed.jsx'
+import PrivateRoute from './components/PrivateRoute.jsx';
+import AuthGate from "./components/AuthGate.jsx";
 const App = () => {
+  const user = useSelector((store) => store.user);
   return (
-    <div>
-      <Provider store={appStore}>
-      <Router>
-        <Routes>
-         {/* Splash page first */}
-          <Route path="/" element={<Splash />} />
-          <Route path='/' element = {<Body/>}>
-            <Route path='/home' element = {<Home/>}/>
-              <Route path='/login' element = {<Login/>}/>
-               <Route path='/feed' element = {<Feed />}/>
-              <Route path='/profile' element = {<Profile/>}/>
-          </Route>
-        </Routes>
-      </Router>
-        <ToastContainer position="top-right" autoClose={3000} />
-      </Provider>
-    </div>
+    <AuthGate splash={Splash}>
+
+      <Routes>
+
+        <Route path="/" element={user ? <Navigate to="/feed" replace /> : <Navigate to="/login" replace />} />
+        <Route path="/login" element={user ? <Navigate to="/feed" replace /> : <Login />} />
+
+        <Route element={<Body />}>
+          <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
+          <Route path="/feed" element={<PrivateRoute><Feed /></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+        </Route>
+      </Routes>
+
+      <ToastContainer position="top-right" autoClose={3000} />
+
+    </AuthGate>
   )
 }
 

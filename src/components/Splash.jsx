@@ -1,17 +1,16 @@
 // src/components/Splash.jsx
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Splash = () => {
-  const navigate = useNavigate();
-
+const user = useSelector((store) => store.user);
+const navigate = useNavigate();
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate('/home'); // Redirect after 5 seconds
-    }, 2000);
-
-    return () => clearTimeout(timer); // cleanup on unmount
-  }, [navigate]);
+    // AuthGate ke baad ye hamesha reliable hoga
+    if (user) navigate("/home", { replace: true });
+    else navigate("/login", { replace: true });
+  }, [user, navigate]);
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-b from-orange-500 to-orange-700 relative">
