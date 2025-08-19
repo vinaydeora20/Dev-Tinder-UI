@@ -10,11 +10,14 @@ import Home from './components/Home.jsx'
 import Feed from './components/Feed.jsx'
 import PrivateRoute from './components/PrivateRoute.jsx';
 import AuthGate from "./components/AuthGate.jsx";
+import ConnectionRequests from './components/ConnectionRequests.jsx'
+import NavBar from './components/NavBar.jsx'
+import Connections from './components/Connections.jsx'
 const App = () => {
   const user = useSelector((store) => store.user);
   return (
     <AuthGate splash={Splash}>
-
+  <NavBar />
       <Routes>
 
         <Route path="/" element={user ? <Navigate to="/feed" replace /> : <Navigate to="/login" replace />} />
@@ -24,6 +27,8 @@ const App = () => {
           <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
           <Route path="/feed" element={<PrivateRoute><Feed /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+                <Route path="/connections" element={<PrivateRoute><Connections /></PrivateRoute>} />
+           <Route path="/connectionRequests" element={<PrivateRoute><ConnectionRequests /></PrivateRoute>} />
         </Route>
       </Routes>
 

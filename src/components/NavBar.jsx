@@ -30,8 +30,10 @@ const NavBar = () => {
             }
             {user && <div className="flex gap-2 mx-5">
 
-                <div className="dropdown dropdown-end">
+                <div className="dropdown dropdown-end flex">
+                    <div className='mx-2 my-2'>{user.firstName}</div>
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                      
                         <div className="w-10 rounded-full">
                             <img
                                 alt="Tailwind CSS Navbar component"
@@ -44,6 +46,18 @@ const NavBar = () => {
                         <li>
                             <Link to="/profile" className="justify-between">
                                 Profile
+                                <span className="badge">New</span>
+                            </Link>
+                        </li>
+                            <li>
+                            <Link to="/connectionRequests" className="justify-between">
+                              connection Requests
+                                <span className="badge">New</span>
+                            </Link>
+                        </li>
+                         <li>
+                            <Link to="/connections" className="justify-between">
+                            Connections
                                 <span className="badge">New</span>
                             </Link>
                         </li>

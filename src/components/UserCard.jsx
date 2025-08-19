@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UserCard = ({user}) => {
+const UserCard = ({user ,sendConnection}) => {
     const {firstName, lastName , skills , _id , about , age , gender ,photoUrl}= user;
   return (
     <div>
@@ -18,8 +18,24 @@ const UserCard = ({user}) => {
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"> ,{gender }</p>
        </div>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{about}</p>
-          <button type="button" class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Pink</button>
-          <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Purple</button>
+              <button 
+            type="button" 
+            // onClick={() => sendConnection('ignored', _id)}
+            onClick={() => { console.log('Button clicked', _id); sendConnection('ignored', _id); }}
+
+            className="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          >
+            Ignore
+          </button>
+          <button 
+            type="button" 
+            // onClick={() => sendConnection('intrested', _id)}
+            onClick={() => { console.log('Button clicked', _id); sendConnection('intrested', _id); }}
+
+            className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          >
+            Interested
+          </button>
         </div>
       </div>
     </div>
